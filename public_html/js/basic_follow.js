@@ -1,9 +1,9 @@
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', {preload: preload, create: create, update: update, render: render});
 
 function preload() {
 
-    game.load.image('background','assets/debug-grid-1920x1920.png');
-    game.load.image('player','assets/arrow.png');
+    game.load.image('background', 'assets/debug-grid-1920x1920.png');
+    game.load.image('player', 'assets/arrow.png');
 
 }
 
@@ -16,11 +16,12 @@ function create() {
 
     game.world.setBounds(0, 0, 1920, 1920);
 
-    game.physics.startSystem(Phaser.Physics.P2JS);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
 
     player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+    player.anchor.setTo(0.5, 0.5);
 
-    game.physics.p2.enable(player);
+    game.physics.enable(player);
 
     cursors = game.input.keyboard.createCursorKeys();
 
@@ -29,27 +30,23 @@ function create() {
 }
 
 function update() {
-
-    player.body.setZeroVelocity();
-    player.body.setZeroRotation();
-
-    if (cursors.up.isDown)
-    {
-        player.body.moveUp(300)
-    }
-    else if (cursors.down.isDown)
-    {
-        player.body.moveDown(300);
-    }
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
+    player.body.angularVelocity = 0;
 
     if (cursors.left.isDown)
     {
-    	player.body.rotateLeft(75);
+        player.body.angularVelocity = -200;
     }
     else if (cursors.right.isDown)
     {
-        player.body.rotateRight(75);
+        player.body.angularVelocity = 200;
     }
+
+//    if (cursors.up.isDown)
+//    {
+        game.physics.arcade.velocityFromAngle(player.angle, 300, player.body.velocity);
+//    }
 
 }
 
