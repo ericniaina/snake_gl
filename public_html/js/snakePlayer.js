@@ -1,4 +1,4 @@
-function Snake(game, cursors) {
+function SnakePlayer(game, cursors) {
     var snakeHead; //head of snake sprite
     var snakeSection = new Array(); //array of sprites that make the snake body sections
     var snakePath = new Array(); //arrary of positions(points) that have to be stored for the path the sections follow

@@ -20,7 +20,7 @@ function create() {
 
     cursors = game.input.keyboard.createCursorKeys();
 
-    player = new Snake(game, cursors);
+    player = new SnakePlayer(game, cursors);
     player.create();
 }
 
