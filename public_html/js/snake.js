@@ -48,6 +48,10 @@ function Snake(game, cursors) {
 
         for (var i = 1; i <= numSnakeSections - 1; i++)
         {
+            var pos1 = snakeSection[i].position;
+            var pos2 = snakePath[i * snakeSpacer];
+            var angle = Phaser.Point.angle(pos2,pos1);
+            snakeSection[i].rotation = angle;
             snakeSection[i].x = (snakePath[i * snakeSpacer]).x;
             snakeSection[i].y = (snakePath[i * snakeSpacer]).y;
         }
